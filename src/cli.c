@@ -37,9 +37,6 @@ static inline void display_result(char *result) {
 static inline void not_implemented() { fprintf(stderr, "Not implemented.\n"); }
 
 int main(int argc, char **argv) {
-
-    int c;
-
     char *result = NULL;
 
     static struct global_args args = {
@@ -69,7 +66,7 @@ int main(int argc, char **argv) {
         // getopt_long stores the option index here
         int option_index = 0;
 
-        c = getopt_long(argc, argv, "i:o:h?", long_options, &option_index);
+        int c = getopt_long(argc, argv, "i:o:h?", long_options, &option_index);
 
         // Detect the end of the options
         if (c == -1)
