@@ -10,8 +10,8 @@ int main() {
     // cu_conv_pem2der("test1.pem", "test2.der");
     // cu_conv_der2pem("test2.der", "test2.pem");
 
-    X509 *cert = NULL;
-    X509_CRL *crl = NULL;
+    CU_CERT *cert = NULL;
+    CU_CRL *crl = NULL;
 
     CU_FILETYPE certt = cu_get_file_type("testfiles/selfsign-cert.pem");
     CU_FILETYPE crlt = cu_get_file_type("testfiles/selfsign.crl");

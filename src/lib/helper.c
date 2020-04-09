@@ -46,12 +46,12 @@ CU_RE_STATUS match_regex(const char *regex, const char *to_match) {
     return exec_regex(&preg, to_match);
 }
 
-inline void free_cert(X509 **cert) {
+inline void free_cert(CU_CERT **cert) {
     X509_free(*cert);
     *cert = NULL;
 }
 
-inline void free_crl(X509_CRL **crl) {
+inline void free_crl(CU_CRL **crl) {
     X509_CRL_free(*crl);
     *crl = NULL;
 }

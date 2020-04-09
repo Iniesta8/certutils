@@ -8,22 +8,22 @@
 
 #include "certutils.h"
 
-CU_STATUS cu_cert_get_subject_name(const X509 *cert, char **subject_name) {
+CU_STATUS cu_cert_get_subject_name(const CU_CERT *cert, char **subject_name) {
     *subject_name = X509_NAME_oneline(X509_get_subject_name(cert), NULL, 0);
     return CU_OK;
 }
 
-CU_STATUS cu_cert_get_issuer_name(const X509 *cert, char **issuer_name) {
+CU_STATUS cu_cert_get_issuer_name(const CU_CERT *cert, char **issuer_name) {
     *issuer_name = X509_NAME_oneline(X509_get_issuer_name(cert), NULL, 0);
     return CU_OK;
 }
 
-CU_STATUS cu_crl_get_issuer_name(const X509_CRL *crl, char **issuer_name) {
+CU_STATUS cu_crl_get_issuer_name(const CU_CRL *crl, char **issuer_name) {
     *issuer_name = X509_NAME_oneline(X509_CRL_get_issuer(crl), NULL, 0);
     return CU_OK;
 }
 
-CU_STATUS cu_cert_get_serial_number(const X509 *cert, char **serial_number) {
+CU_STATUS cu_cert_get_serial_number(const CU_CERT *cert, char **serial_number) {
     CU_STATUS rc = CU_OK;
     const ASN1_INTEGER *serial = X509_get0_serialNumber(cert);
     BIGNUM *bn_serial = ASN1_INTEGER_to_BN(serial, NULL);
@@ -73,7 +73,7 @@ cleanup:
     return rc;
 }
 
-CU_STATUS cu_cert_get_not_before(const X509 *cert, char **not_before) {
+CU_STATUS cu_cert_get_not_before(const CU_CERT *cert, char **not_before) {
     const ASN1_TIME *nb = X509_get0_notBefore(cert);
 
     if (asn1_time_to_buf(nb, not_before) != 0) {
@@ -82,7 +82,7 @@ CU_STATUS cu_cert_get_not_before(const X509 *cert, char **not_before) {
     return CU_OK;
 }
 
-CU_STATUS cu_cert_get_not_after(const X509 *cert, char **not_after) {
+CU_STATUS cu_cert_get_not_after(const CU_CERT *cert, char **not_after) {
     const ASN1_TIME *na = X509_get0_notAfter(cert);
 
     if (asn1_time_to_buf(na, not_after) != 0) {
@@ -91,7 +91,7 @@ CU_STATUS cu_cert_get_not_after(const X509 *cert, char **not_after) {
     return CU_OK;
 }
 
-CU_STATUS cu_crl_get_last_update(const X509_CRL *crl, char **last_update) {
+CU_STATUS cu_crl_get_last_update(const CU_CRL *crl, char **last_update) {
     const ASN1_TIME *lu = X509_CRL_get0_lastUpdate(crl);
 
     if (asn1_time_to_buf(lu, last_update) != 0) {
@@ -100,7 +100,7 @@ CU_STATUS cu_crl_get_last_update(const X509_CRL *crl, char **last_update) {
     return CU_OK;
 }
 
-CU_STATUS cu_crl_get_next_update(const X509_CRL *crl, char **next_update) {
+CU_STATUS cu_crl_get_next_update(const CU_CRL *crl, char **next_update) {
     const ASN1_TIME *nu = X509_CRL_get0_nextUpdate(crl);
 
     if (asn1_time_to_buf(nu, next_update) != 0) {
@@ -109,7 +109,7 @@ CU_STATUS cu_crl_get_next_update(const X509_CRL *crl, char **next_update) {
     return CU_OK;
 }
 
-CU_STATUS cu_cert_get_extension(const X509 *cert, int nid, char **ext_data) {
+CU_STATUS cu_cert_get_extension(const CU_CERT *cert, int nid, char **ext_data) {
     CU_STATUS rc = CU_OK;
     BUF_MEM *bptr = NULL;
     int idx = -1;
@@ -142,7 +142,7 @@ cleanup:
     return rc;
 }
 
-CU_STATUS cu_cert_get_fingerprint(const X509 *cert, const EVP_MD *digest_alg,
+CU_STATUS cu_cert_get_fingerprint(const CU_CERT *cert, const EVP_MD *digest_alg,
                                   char **fingerprint) {
     CU_STATUS rc = CU_OK;
     BIO *bio = NULL;

@@ -2,7 +2,7 @@
 
 #include "certutils.h"
 
-CU_STATUS cu_read_cert(const char *filename, X509 **cert) {
+CU_STATUS cu_read_cert(const char *filename, CU_CERT **cert) {
     CU_STATUS rc = CU_OK;
 
     FILE *fp = fopen(filename, "r");
@@ -27,7 +27,7 @@ cleanup:
     return rc;
 }
 
-CU_STATUS cu_read_crl(const char *filename, X509_CRL **crl) {
+CU_STATUS cu_read_crl(const char *filename, CU_CRL **crl) {
     CU_STATUS rc = CU_OK;
 
     FILE *fp = fopen(filename, "r");

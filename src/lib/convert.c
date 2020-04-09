@@ -3,7 +3,7 @@
 
 CU_STATUS cu_cert_conv_pem2der(const char *pem_cert, const char *der_cert) {
     CU_STATUS rc = CU_OK;
-    X509 *cert = NULL;
+    CU_CERT *cert = NULL;
 
     rc = cu_read_cert(pem_cert, &cert);
     if (CU_OK != rc) {
@@ -35,7 +35,7 @@ cleanup:
 
 CU_STATUS cu_cert_conv_der2pem(const char *der_cert, const char *pem_cert) {
     CU_STATUS rc = CU_OK;
-    X509 *cert = NULL;
+    CU_CERT *cert = NULL;
     FILE *fp_in = NULL;
     FILE *fp_out = NULL;
 

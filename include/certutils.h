@@ -29,6 +29,9 @@ typedef enum {
     CU_FTYPE_UNKNOWN  ///< Unknown file type
 } CU_FILETYPE;
 
+typedef X509 CU_CERT;
+typedef X509_CRL CU_CRL;
+
 // clang-format off
 #define CU_NID_basic_constraints          NID_basic_constraints        ///< Basic Constraints
 #define CU_NID_key_usage                  NID_key_usage                ///< Key Usage
@@ -51,25 +54,25 @@ typedef enum {
 
 CU_FILETYPE cu_get_file_type(const char *filename);
 
-CU_STATUS cu_read_cert(const char *filename, X509 **cert);
-CU_STATUS cu_read_crl(const char *filename, X509_CRL **crl);
+CU_STATUS cu_read_cert(const char *filename, CU_CERT **cert);
+CU_STATUS cu_read_crl(const char *filename, CU_CRL **crl);
 CU_STATUS cu_read_file(const char *filename, char **buf, size_t *buf_len);
 
 CU_STATUS cu_cert_conv_pem2der(const char *pem_cert, const char *der_cert);
 CU_STATUS cu_cert_conv_der2pem(const char *der_cert, const char *pem_cert);
 
-CU_STATUS cu_cert_get_subject_name(const X509 *cert, char **subject_name);
-CU_STATUS cu_cert_get_issuer_name(const X509 *cert, char **issuer_name);
-CU_STATUS cu_cert_get_serial_number(const X509 *cert, char **serial_number);
-CU_STATUS cu_cert_get_not_before(const X509 *cert, char **not_before);
-CU_STATUS cu_cert_get_not_after(const X509 *cert, char **not_after);
-CU_STATUS cu_cert_get_extension(const X509 *cert, int nid, char **ext_data);
-CU_STATUS cu_cert_get_fingerprint(const X509 *cert, const EVP_MD *digest_alg,
+CU_STATUS cu_cert_get_subject_name(const CU_CERT *cert, char **subject_name);
+CU_STATUS cu_cert_get_issuer_name(const CU_CERT *cert, char **issuer_name);
+CU_STATUS cu_cert_get_serial_number(const CU_CERT *cert, char **serial_number);
+CU_STATUS cu_cert_get_not_before(const CU_CERT *cert, char **not_before);
+CU_STATUS cu_cert_get_not_after(const CU_CERT *cert, char **not_after);
+CU_STATUS cu_cert_get_extension(const CU_CERT *cert, int nid, char **ext_data);
+CU_STATUS cu_cert_get_fingerprint(const CU_CERT *cert, const EVP_MD *digest_alg,
                                   char **fingerprint);
 
-CU_STATUS cu_crl_get_issuer_name(const X509_CRL *crl, char **issuer_name);
-CU_STATUS cu_crl_get_last_update(const X509_CRL *crl, char **last_update);
-CU_STATUS cu_crl_get_next_update(const X509_CRL *crl, char **next_update);
+CU_STATUS cu_crl_get_issuer_name(const CU_CRL *crl, char **issuer_name);
+CU_STATUS cu_crl_get_last_update(const CU_CRL *crl, char **last_update);
+CU_STATUS cu_crl_get_next_update(const CU_CRL *crl, char **next_update);
 
 #ifdef __cplusplus
 }

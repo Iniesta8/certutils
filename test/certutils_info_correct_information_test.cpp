@@ -7,7 +7,7 @@ TEST_GROUP(CertutilsInfoCorrectInformationTest){};
 
 TEST(CertutilsInfoCorrectInformationTest, CertSubjectName) {
     char *subject = NULL;
-    X509 *cert = NULL;
+    CU_CERT *cert = NULL;
     cu_cert_get_subject_name(cert, &subject);
 
     CHECK_TEXT(subject != NULL, "NULL returned by cu_cert_get_subject_name");

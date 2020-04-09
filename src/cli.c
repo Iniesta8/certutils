@@ -108,8 +108,8 @@ int main(int argc, char **argv) {
         putchar('\n');
     }
 
-    X509 *cert = NULL;
-    X509_CRL *crl = NULL;
+    CU_CERT *cert = NULL;
+    CU_CRL *crl = NULL;
 
     switch (args.subcmd_flag) {
     case CU_SUBCMD_CERT:
