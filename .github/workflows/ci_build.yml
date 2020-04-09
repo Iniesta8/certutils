@@ -1,10 +1,6 @@
 name: ci_build
 
-on:
-  push:
-    branches: [ master ]
-  pull_request:
-    branches: [ master ]
+on: [push, pull_request]
 
 jobs:
   build:
@@ -13,5 +9,5 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: cmake build 
-      run: sh ./build.sh 
+    - name: cmake build
+      run: sh ./build.sh
