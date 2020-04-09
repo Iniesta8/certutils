@@ -6,7 +6,7 @@
 #include "certutils.h"
 #include "openssl_mock.h"
 
-#include "CppUTestExt/MockSupport.h"
+#include <CppUTestExt/MockSupport.h>
 
 char err[256];
 
@@ -175,4 +175,102 @@ void BN_free(BIGNUM *a) {
     mock().actualCall(__FUNCTION__).withParameterOfType("BIGNUM *", "a", a);
 
     free(a);
+}
+
+long BIO_ctrl(BIO *bp,int cmd,long larg,void *parg) {
+    return 0L;
+}
+
+int BIO_puts(BIO *b, const char *buf) {
+    return 0;
+}
+
+const BIO_METHOD* BIO_s_mem() {
+    return nullptr;
+}
+
+int BIO_printf(BIO *bio, const char *format, ...) {
+    return 0;
+}
+
+int BIO_free(BIO *a) {
+    return 0;
+}
+
+BIO* BIO_new(const BIO_METHOD *type) {
+    return nullptr;
+};
+
+int X509_digest(const X509 *data, const EVP_MD *type,
+        unsigned char *md, unsigned int *len) {
+    return 0;
+}
+void X509_free(X509 *a) {
+}
+
+X509_EXTENSION *X509_get_ext(const X509 *x, int loc) {
+    return nullptr;
+}
+
+const ASN1_TIME * X509_get0_notBefore(const X509 *x) {
+    return nullptr;
+}
+
+const ASN1_TIME *X509_get0_notAfter(const X509 *x) {
+    return nullptr;
+}
+
+const ASN1_TIME *X509_CRL_get0_lastUpdate(const X509_CRL *crl) {
+    return nullptr;
+}
+
+const ASN1_TIME *X509_CRL_get0_nextUpdate(const X509_CRL *crl) {
+    return nullptr;
+}
+
+int X509_get_ext_by_NID(const X509 *x, int nid, int lastpos) {
+    return 0;
+}
+
+void X509_CRL_free(X509_CRL *a) {
+}
+
+int EVP_MD_type(const EVP_MD *md) {
+    return 0;
+}
+
+const EVP_MD *EVP_sha1() {
+    return nullptr;
+}
+
+extern "C" int X509V3_EXT_print(BIO *out, X509_EXTENSION *ext, unsigned long flag, int indent) {
+    return 0;
+}
+
+const char *OBJ_nid2sn(int n) {
+    return nullptr;
+}
+
+int PEM_write_X509(FILE *fp, X509 *x) {
+    return 0;
+}
+
+X509_CRL *PEM_read_X509_CRL(FILE *fp, X509_CRL **x, pem_password_cb *cb, void *u) {
+    return nullptr;
+}
+
+X509 *PEM_read_X509(FILE *fp, X509 **x, pem_password_cb *cb, void *u) {
+    return nullptr;
+}
+
+X509 *d2i_X509_fp(FILE *fp, X509 **x) {
+    return nullptr;
+}
+
+int i2d_X509_fp(FILE *fp, X509 *x) {
+    return 0;
+}
+
+int ASN1_TIME_print(BIO *b, const ASN1_TIME *s) {
+    return 0;
 }

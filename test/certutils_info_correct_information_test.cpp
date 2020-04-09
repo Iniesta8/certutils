@@ -1,7 +1,7 @@
 #include "certutils.h"
 #include "mock/openssl_mock.h"
 
-#include "CppUTest/CommandLineTestRunner.h"
+#include <CppUTest/CommandLineTestRunner.h>
 
 TEST_GROUP(CertutilsInfoCorrectInformationTest){};
 

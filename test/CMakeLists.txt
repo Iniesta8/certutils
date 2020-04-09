@@ -16,25 +16,13 @@ else()
     endif()
 endif()
 
-add_executable(testapi test_api.c mock/openssl_mock.cpp)
-target_link_libraries(testapi PRIVATE certutilslib)
-target_link_libraries(testapi PRIVATE CppUTest)
-target_link_libraries(testapi PRIVATE CppUTestExt)
-add_test(NAME testapi COMMAND testapi WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
+add_subdirectory("mock")
 
-set(OPENSSL_MOCK_TESTS
-    "certutils_info_correct_information_test")
+add_executable(testapi test_api.c)
+target_link_libraries(testapi PRIVATE certutilslib CppUTest openssl_mock)
+add_test(NAME testapi COMMAND testapi)
 
-foreach(TEST IN LISTS OPENSSL_MOCK_TESTS)
-    message(${TEST})
-    add_executable(${TEST} "${TEST}.cpp" mock/openssl_mock.cpp)
-    target_link_libraries(${TEST} PRIVATE certutilslib)
-    target_link_libraries(${TEST} PRIVATE CppUTest)
-    target_link_libraries(${TEST} PRIVATE CppUTestExt)
-    add_test(NAME ${TEST} COMMAND ${TEST} WORKING_DIRECTORY ${CMAKE_BINARY_DIR})
-endforeach()
 
-# Copy testfiles from source to binary directory
-#add_custom_command(
-#        TARGET testapi POST_BUILD
-#        COMMAND cp -r ${CMAKE_SOURCE_DIR}/test/testfiles ${CMAKE_BINARY_DIR}/)
+add_executable(certutils_info_correct_information_test certutils_info_correct_information_test.cpp)
+target_link_libraries(certutils_info_correct_information_test PRIVATE certutilslib CppUTest openssl_mock)
+add_test(NAME certutils_info_correct_information_test COMMAND certutils_info_correct_information_test)

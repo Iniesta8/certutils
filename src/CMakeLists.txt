@@ -9,4 +9,3 @@ target_compile_options(${EXECTARGET} PRIVATE -Wall -Wextra -Wpedantic -Wshadow -
 install(TARGETS ${EXECTARGET} EXPORT ${EXECTARGET}-config DESTINATION bin)
 
 add_subdirectory(lib)
-
