@@ -4,10 +4,19 @@ on: [push, pull_request]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        config:
+          - { name: "GCC 9", cc: "gcc-9", cxx: "g++-9" }
+          - { name: "GCC 8", cc: "gcc-8", cxx: "g++-8" }
+          - { name: "Clang 9", cc: "clang-9", cxx: "clang++-9" }
+          - { name: "Clang 8", cc: "clang-8", cxx: "clang++-8" }
+    name: ${{ matrix.config.name }}
     steps:
-    - uses: actions/checkout@v2
-    - name: cmake build
-      run: sh ./build.sh
+      - uses: actions/checkout@master
+      - name: cmake build
+        env:
+          CC: ${{ matrix.config.cc }}
+          CXX: ${{ matrix.config.cxx }}
+        run: ./build.sh
